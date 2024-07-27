@@ -1,0 +1,214 @@
+
+<?php 
+
+use Magento\Framework\File\Uploader;
+
+$quoteData = $block->getQuoteData(); 
+$objectManager =  \Magento\Framework\App\ObjectManager::getInstance();
+
+$mediaUrl = $objectManager->get('\GrandRiver\Configurator\Block\Adminhtml\Items\Column\Name')->getMediaUrl();
+$pricHelper = $this->helper('\Magento\Framework\Pricing\Helper\Data');
+
+?>
+<div class= "admin__scope-old">
+	<div class="view-custome-data customer-information">
+		<h4>Customer's Cart Data</h4>
+		<table class="admin__table-secondary">
+	        <tbody>
+		        <tr>
+		            <th>Customer Name:</th>
+		            <td><?php echo $quoteData['first_name'].' '.$quoteData['last_name'];?></td>
+		        </tr>
+		        <tr>
+		            <th>Customer Email:</th>
+		            <td><?= $quoteData['email']; ?></td>
+		        </tr>
+		        <tr>
+		            <th>Total Qty:</th>
+		            <td><?= $block->escapeHtml($localeFormatter->formatNumber((float) $quoteData['qty']))?></td>
+
+		        </tr>
+		        <tr>
+		            <th>Sub Total:</th>
+		            <td><?= $pricHelper->currency($quoteData['subtotal'],true,false); ?></td>
+
+		        </tr>
+		        <tr>
+		            <th>Grand Total:</th>
+		            <td>
+		            	<?= $pricHelper->currency($quoteData['grandtotal'],true,false); ?>
+		            </td>
+		        </tr>
+		        <tr>
+		            <th>Created At:</th>
+		            <td><?= $quoteData['created']; ?></td>
+		        </tr>
+		        <tr>
+		            <th>Updated At:</th>
+		            <td><?= $quoteData['updated']; ?></td>
+		        </tr>
+	        </tbody>
+	    </table>
+	</div>
+	<div class="personlization-item-data">
+		<?php $getQuoteItems = $block->getQuoteItems(); 
+							$i = 1;
+		?>
+
+		<table class="data-grid personlization-table" id="personlization-table-data">
+			<thead>
+		         <tr>
+		         	<th class="col id">#</th>
+		            <th class="col name">Product Name</th>
+		            <th class="col sku">SKU</th>
+		            <th class="col price">Price</th>
+		            <th class="col qty">Qty</th>
+		            <th class="col subtotal">Subtotal</th>
+		        </tr>
+		    </thead>
+			<?php foreach ($getQuoteItems as $item) { 
+				 $getPersonlazationData = $block->getPersonlazationData($item['item_id']);
+				?> 
+				<tbody>
+				   <tr>
+				   	  <td class="col name" data-th="Serial Number">
+				   	  	<?= $i++ ;?>
+				   	  </td>
+				      <td class="col name" data-th="Product Name">
+				         <strong class="product name product-item-name"><?= $item['name']; ?></strong>
+				         <br>
+				         <?php if($getPersonlazationData){ ?>
+				         	<a href="javascript:void(0)" data-show="show-row-<?= (int) $item['item_id'] ?>" class="personalization">Show Personalization  <i class="arrow down personlazation-show"></i> <i class="arrow up personlazation-hide"></i>  </a>
+				         <?php } ?>
+				      </td>
+				      <td class="col sku" data-th="SKU">
+				         <?= $item['sku']; ?>    
+				      </td>
+				      <td class="col price" data-th="Price">
+				         <span class="price">
+				         	<?= $pricHelper->currency($item['price'],true,false); ?>
+				         </span> 
+				      </td>
+				      <td class="col qty" data-th="Qty">
+			               <span class="content">
+			               		<?= $block->escapeHtml($localeFormatter->formatNumber((float) $item['qty'])) ?>
+
+			               </span>
+				      </td>
+				      <td class="col subtotal" data-th="Subtotal">
+				         <span class="cart-price">
+				         	<span class="price"><?= $pricHelper->currency($item['row_total'],true,false); ?>
+				         		
+				         	</span>
+				     	 </span>
+				      </td>
+				   </tr>
+				   	<?php if($getPersonlazationData){ 
+				   		$j = 1;?>
+				   		<tr class="hide-element" id="show-row-<?= (int) $item['item_id'] ?>">
+				            <td colspan="6">
+				            <!--personlization data------>
+				            <table class="main-pers-table">
+				                <tr>
+				                	<!-- <th>#</th> -->
+				                    <th>Component</th>
+				                    <th>Component natural ID</th>
+				                    <th>Product Sku</th>
+				                    <th>Value</th>
+				                    <th>Price</th>
+				                </tr>
+				          	<?php
+			        		foreach($getPersonlazationData as $personalization){
+			        		// echo "<pre>";
+                            // print_r($personalization);
+			        			?>
+			        			<tr>
+			        				<!-- <td>
+                                    	<?php //echo $j++; ?>
+                                    </td> -->
+                                    <td>
+                                    <?php  echo $personalization['label']??""; ?>
+                                    </td>  
+                                    <td>
+                                        <?php  echo $personalization ['natural_id']??""; ?>
+                                    </td>
+                                    <td>
+                                        <?php  echo $personalization['sku']??""; ?>
+                                    </td>
+                                    <td>
+                                      <?php if(isset($personalization['logo']) && $personalization['logo'] !="") { 
+
+                                            $logo = preg_replace('/[^A-Za-z0-9\.\_ ]/', '', $personalization['logo']);
+                                        ?>
+                                        <a href="<?php echo $mediaUrl . 'logos/'.$logo?>" target="_blank"  style="text-decoration: none">
+                                            <?php if (preg_match('/\.(png|gif|jpe?g)$/i',(string)$personalization['logo'])){?>
+                                            <img src="<?php echo $mediaUrl .'logos/'.$logo?>" alt="Logo" height="50px" width="60px" />
+                                            <?php }else { ?>
+                                                [Download]
+                                            <?php }?>
+                                        </a>
+                                       <!--  <a href="<?php echo $mediaUrl . 'logos/'.Uploader::getCorrectFileName($personalization['logo'])?>" target="_blank"  style="text-decoration: none">
+                                            <?php if (preg_match('/\.(png|gif|jpe?g)$/i',(string)$personalization['logo'])){?>
+                                            <img src="<?php echo $mediaUrl .'logos/'.Uploader::getCorrectFileName($personalization['logo'])?>" alt="Logo" height="50px" width="60px" />
+                                            <?php }else { ?>
+                                                [Download]
+                                            <?php }?>
+                                        </a> -->
+                                        <?php }  
+                                        
+                                        echo urldecode($personalization['value']) ?? "";
+                                        
+                                        if(isset($personalization['engraving'])){?>
+
+                                            <table class="child-table">
+                                                <tr>
+                                                    <th>Award No/Plate No</th>
+                                                    <th>Line No.</th>
+                                                    <th>Value</th>
+
+                                                </tr>
+                                                <?php foreach($personalization['engraving'] as $engraving){ ?>
+
+                                                    <tr>
+                                                        <td><?php  echo $engraving['sequence']??"";?> </td>
+                                                        <td><?php  echo $engraving['position']??"";?></td>
+                                                        <td><?php  echo $engraving['value']??"";?></td>
+                                                    </tr>
+
+                                                <?php } ?>
+                                            </table>
+                                            
+                                       <?php } ?>  
+                                    </td>  
+                                    <td>
+                                        <?php echo $personalization['price']; ?>
+                                        
+                                    </td>           
+                                </tr>
+
+			        		<?php } ?>
+				                </table>
+				            <!--personlaization data end ------>
+				            </td>
+			        	</tr>
+
+
+				  	<?php  } ?>
+  
+				</tbody>
+
+			<?php } ?>
+
+		</table>
+
+	<div>
+
+</div>
+
+<style>
+	
+
+	.viewcart-index-view th.col{
+		width: 1px;
+	}
+</style>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="meticulosity" translate="label" sortOrder="10">
+            <label>Meticulosity</label>
+        </tab>
+         <section id="shipping_modification" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Shipping Modification</label>
+            <tab>meticulosity</tab>
+            <resource>Magento_Backend::admin</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping Charge Modification</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!-- <field id="min_cart_subtotal" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minimum Cart Subtotal</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="apply_percentage_on" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Percentage on</label>
+                    <source_model>Meticulosity\ShippingModification\Model\Config\Source\ApplyPercentage</source_model>
+                </field>
+                <field id="charges_type" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Charges Type</label>
+                    <source_model>Meticulosity\ShippingModification\Model\Config\Source\ChargesType</source_model>
+                </field> -->
+                <field id="value_of_charges" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Percentage Charge</label>
+                     <validate>required-entry validate-number integer validate-digits validate-not-negative-number validate-greater-than-zero validate-digits-range digits-range-0-100</validate>
+                    <comment>This Percent will be charged on Order Sub Total.</comment>
+                </field>
+                <field id="display_text" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Text</label>
+                    <comment>This text will display on the frontend.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

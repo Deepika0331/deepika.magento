@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+          <add id="Meticulosity_ViewCart::viewcart" title="View Customers Cart" translate="title" module="Meticulosity_ViewCart" sortOrder="90" parent="Magento_Customer::customer" action="viewcart" resource="Meticulosity_ViewCart::viewcart"/>
+    </menu>
+</config>

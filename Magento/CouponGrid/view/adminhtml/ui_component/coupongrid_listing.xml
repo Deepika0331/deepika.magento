@@ -1,0 +1,131 @@
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+     <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupongrid_listing.coupongrid_listing_data_source</item>
+            <item name="deps" xsi:type="string">coupongrid_listing.coupongrid_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">mycustomgrid_columns</item>
+    </argument>
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">true</item>
+            </item>
+        </argument>   
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <!-- <exportButton name="export_button"/> -->
+    </listingToolbar>
+    <dataSource name="coupongrid_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">coupongrid_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <columns name="mycustomgrid_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">55</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="increment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">1</item> -->
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="label" xsi:type="string" translate="true">OrderID</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="customer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">3</item> -->
+                    <item name="label" translate="true" xsi:type="string">Customer Email</item>
+                </item>
+            </argument>
+        </column>
+
+
+        <column name="customer_firstname">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">4</item> -->
+                    <item name="label" translate="true" xsi:type="string">Customer Name</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="subtotal">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">5</item> -->
+                    <item name="label" translate="true" xsi:type="string">Sub Total</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="grand_total">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">6</item> -->
+                    <item name="label" translate="true" xsi:type="string">Grand Total</item>
+                </item>
+            </argument>
+        </column>
+
+        <column name="coupon_code">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Meticulosity\CouponGrid\Model\CouponGrid\Source\CouponCode</item>
+                <item name="config" xsi:type="array">
+                    <item name="fieldClass" xsi:type="string">coupon_code_filter</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="sorting" xsi:type="string">asc</item>
+                    <!-- <item name="sortOrder" xsi:type="number">26</item> -->
+                    <item name="label" translate="true" xsi:type="string">Coupon Name</item>
+                </item>
+            </argument>
+        </column>
+        
+       <!--  <column name="couponcode" component="Magento_Ui/js/grid/columns/select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" translate="true" xsi:type="string">Coupon Code</item>
+                </item>
+            </argument>
+        </column> -->
+
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <!-- <item name="sortOrder" xsi:type="number">7</item> -->
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
+                </item>
+            </argument>
+        </column>
+
+    </columns>
+</listing>

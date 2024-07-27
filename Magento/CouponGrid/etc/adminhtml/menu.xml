@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+          <add id="Meticulosity_CouponGrid::coupongrid" title="Coupons Report" translate="title" module="Meticulosity_CouponGrid" sortOrder="90" parent="Magento_Reports::report_salesroot" action="coupongrid" resource="Meticulosity_CouponGrid::coupongrid"/>
+
+    </menu>
+</config>

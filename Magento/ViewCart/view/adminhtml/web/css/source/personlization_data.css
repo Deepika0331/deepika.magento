@@ -1,0 +1,105 @@
+
+    #personlization-table-data.data.table tbody td {
+        font-size: 12.8px;
+    }
+    #personlization-table-data.data.table tbody td {
+        padding: 4px;
+    }
+    .personlization-item-data .product-item-name {
+        font-size: 14px;
+    }
+    table#personlization-table-data tbody td.col.name table td table {
+        margin-top: 5px;
+    }
+    .hide-element{
+        display:none;
+    }
+    li.item {
+        list-style: none;
+    }
+    .arrow {
+        border: solid #467bb0;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .down {
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+    td.col.name a {
+        letter-spacing: 1px;
+    }
+    table.child-table {
+        margin-top: 11px;
+        margin-bottom: 7px;
+    }
+    ul.items-qty {
+        margin: 0;
+    }
+    .up {
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+    .main-pers-table{
+                cellspacing:0 ;
+                cellpadding:0 ;
+                border:0;
+                order:1px solid #EAEAEA;
+    }
+    table.main-pers-table th {
+                /* background-color: #EAEAEA!important; */
+                padding: 3px;
+    }
+    table.child-table th {
+                background-color: #EAEAEA;
+                padding: 3px;
+     }
+    td.col.name {
+        padding-top: 12px !important;
+        padding-bottom: 12px !important;
+    }
+    
+    i.arrow.up.personlazation-hide {
+        display: none;
+    }
+   
+    table#personlization-table-data {
+        margin-top: 22px;
+    }
+    
+    table#personlization-table-data table.main-pers-table {
+        width: 100%;
+    }
+    table#personlization-table-data table.main-pers-table table.child-table {
+        width: 92%;
+    }
+    table#personlization-table-data table.main-pers-table th {
+        text-align: left;
+    }
+
+    table#personlization-table-data table.main-pers-table tr th {
+        background-color: #514943 !important;
+    }
+    
+    table#personlization-table-data tr {
+        border-bottom: 0.1rem solid #d6d6d6;
+    }
+
+    .viewcart-index-view th.col{
+		width: 28%;
+		text-align: left;
+	}
+	.viewcart-index-view td.col{
+		text-align: left;
+	}
+
+	.data-grid th {
+	  background-color: #514943;
+	  border: 0.1rem solid #8a837f;
+	  border-left-color: transparent;
+	  color: #ffffff;
+	  font-weight: 600;
+	  padding: 1rem 1rem;
+	  text-align: left;
+	}

@@ -1,0 +1,12 @@
+
+
+<?php /* @escapeNotVerified */ //$data = $block->getCheckoutConfig(); 
+
+//$dataArray = json_decode($data, true); 
+//$quoteId = $data['quoteData']['entity_id'];
+ //echo $block->getQuoteId();
+//print_r($block->getQuoteId());
+$quoteId = $block->getQuoteId();
+?>
+
+<p style="width: fit-content;">Your Cart ID: <?= $quoteId; ?> </p>
