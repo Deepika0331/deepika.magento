@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <collect_shipping>
+                <active>1</active>
+                <title>Collect Shipping</title>
+                <name>Bill to my Account</name>
+                <carriers><![CDATA[{"item1":{"carrier":"FedEx Ground Collect"},"item2":{"carrier":"FedEx 3rd Party"},"item3":{"carrier":"UPS Collect"}}]]></carriers>
+                <shipping_cost>0</shipping_cost>
+                <sallowspecific>0</sallowspecific>
+                <sort_order>3</sort_order>
+                <model>Meticulosity\CollectShipping\Model\Carrier\CollectShipping</model>
+            </collect_shipping>
+        </carriers>
+    </default>
+</config>

@@ -1,0 +1,75 @@
+<li class="radioparent" data-bind="click: $parents[1].selectShippingMethod.bind($parents[1])">
+    <!-- ko if:  method.error_message -->
+    <ul class="messages">
+        <li class="error-msg">
+            <ul>
+                <li data-bind="text: method.error_message"></li>
+            </ul>
+        </li>
+    </ul>
+    <!-- /ko -->
+
+    <!-- ko ifnot: method.error_message -->
+    <!-- ko if: carrier.methods.length == 1 && $parents[1].getShippingList().length == 1 -->
+    <input class="radio"
+           type="radio"
+           data-bind="attr: {
+                checked: carrier.methods.length == 1,
+                'value' : method.carrier_code + '_' + method.method_code,
+                'id': 's_method_' + method.method_code,
+                'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code
+             }" />
+    <!-- /ko -->
+    <!--ko ifnot: (carrier.methods.length == 1 && $parents[1].getShippingList().length == 1)-->
+    <input type="radio"
+           data-bind="
+                value: method.carrier_code + '_' + method.method_code,
+                checked: $parents[1].isSelected,
+                attr: {
+                    'id': 's_method_' + method.carrier_code + '_' + method.method_code,
+                    'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code
+                }"
+           class="radio"/>
+    <!--/ko-->
+    <label data-bind="attr: {'id': 's_method_' + method.carrier_code + '_' + method.method_code}">
+        <span data-bind="text:method.method_title"></span>
+        <!--<span class="col-price" data-bind="text: $parents[1].formatPrice(method.amount)"></span>-->
+        <!-- ko foreach: $parents[1].getRegion('price') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+    </label>
+    <!-- /ko -->
+</li>
+<li class="row" if="element.isCollectShipping(method)" data-bind="visible: element.isCollectShippingVisible">
+    <div class="collect-shipping-carrier fieldset" style="width: 300px;">
+        <div class="field required">
+            <label class="label" for="custom_carrier">
+                <span data-bind="i18n: 'Carrier'"></span>
+            </label>
+            <div class="control">
+                <select class="input-select"
+                        id="custom_carrier"
+                        name="extension_attributes[custom_carrier]"
+                        data-bind="options: element.getCollectShippingCarriers(),
+                        optionsText: 'carrier',
+                        optionsValue: 'carrier',
+                        value: element.getCustomCarrier()">
+                </select>
+            </div>
+        </div>
+        <div class="field required">
+            <label class="label" for="custom_account_number">
+                <span data-bind="i18n: 'Account Number'"></span>
+            </label>
+            <div class="control">
+                <input class="input-text"
+                       id="custom_account_number"
+                       name="extension_attributes[custom_account_number]"
+                       type="text"
+                       data-bind="value: element.getCustomAccountNumber()"
+                       data-validate='{"required":true}'
+                />
+            </div>
+        </div>
+    </div>
+</li>
