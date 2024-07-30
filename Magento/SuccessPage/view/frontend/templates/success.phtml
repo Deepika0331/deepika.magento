@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get(\Magento\Store\Model\StoreManagerInterface::class);
+    $mediaUrl = $storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $checkoutImage = $mediaUrl."/shopping-cart-stars.webp";
+?>
+<div class="checkout-success">
+    <?php if ($block->getOrderId()) :?>
+        <?php if ($block->getCanViewOrder()) :?>
+            <p><?= $block->escapeHtml(__('Awesome! Your Order # is %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+        <?php  else :?>
+            <p><?= $block->escapeHtml(__('Awesome! Your Order # is: <span>%1</span>.', $block->getOrderId()), ['span']) ?></p>
+        <?php endif;?>
+           <p class= "order-data"><?= $block->escapeHtml(__('An order confirmation has been emailed to you.')) ?></p>
+
+            <p class= "order-data"><?= $block->escapeHtml(__('We\'ll get started on your order!')) ?></p>
+            <p class= "order-data"><?= $block->escapeHtml(__('Tracking info will be emailed as soon as it\'s available.')) ?></p>
+            <img class="checkout-image" src="<?= $checkoutImage; ?>" alt="shopping-image"/>
+    <?php endif;?>
+
+    <?= $block->getAdditionalInfoHtml() ?>
+
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= $block->escapeUrl($block->getContinueUrl()) ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    
+    .checkout-success {
+        font-family: NONE;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .checkout-success p {
+        font-size: 30px;
+        line-height: normal;
+        margin: 0;
+        color: #123658;
+    }
+    .checkout-success  a.order-number {
+        color: #123658;
+    }
+    .checkout-success  img.checkout-image {
+        margin-top: 10px;
+        width: 610px;
+    }
+    @media(max-width:767px){
+            .checkout-success p {
+            font-size: 24px;
+        }
+    }
+
+    .checkout-success .actions-toolbar {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .checkout-onepage-success div#registration {
+        text-align: center; 
+        font-size: 20px;
+        font-family: NONE;
+        font-weight: bold;
+        text-align: center;
+        color: #123658;
+    }
+
+    .checkout-onepage-success p.order-data {
+        font-size: 24px;
+    }
+</style>
