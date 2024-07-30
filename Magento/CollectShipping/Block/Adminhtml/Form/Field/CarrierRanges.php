@@ -8,7 +8,7 @@ use Magento\Config\Block\System\Config\Form\Field\FieldArray\AbstractFieldArray;
 use Magento\Framework\DataObject;
 
 /**
- * Class CarrierRanges
+ * Class Carrier Ranges
  * @package Meticulosity\CollectShipping\Block\Adminhtml\Form\Field
  */
 class CarrierRanges extends AbstractFieldArray
